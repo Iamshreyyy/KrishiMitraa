@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+header {
+    background-color: #4CAF50;
+    padding: 15px;
+    text-align: center;
+}
+
+header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+header ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+header ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Seller Box Styles */
+.sellers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    flex-grow: 1; /* Push footer to the bottom */
+}
+
+.seller-box {
+    display: flex;
+    background-color: #fff;
+    width: 45%;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.seller-box img {
+    width: 160px;
+    height: 120px; /* Wider image */
+    border-radius: 8px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.seller-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.seller-details h3 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.seller-details p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    margin-top: auto; /* Ensure footer stays at bottom */
+}
+
+</style>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content: Seller Information -->
+    <main>
+        <section class="sellers">
+            <div class="seller-box">
+                <img src="seller1.jpg" alt="Seller 1">
+                <div class="seller-details">
+                    <h3>John Doe</h3>
+                    <p>Rating: ★★★★☆</p>
+                    <p>Location: Kansas, USA</p>
+                    <p>Quantity: 100 kg</p>
+                    <p>Price: $200</p>
+                    <p>Phone: (123) 456-7890</p>
+                    <button>Enquire Now</button>
+                </div>
+            </div>
+            <div class="seller-box">
+                <img src="seller2.jpg" alt="Seller 2">
+                <div class="seller-details">
+                    <h3>Jane Smith</h3>
+                    <p>Rating: ★★★☆☆</p>
+                    <p>Location: Texas, USA</p>
+                    <p>Quantity: 150 kg</p>
+                    <p>Price: $250</p>
+                    <p>Phone: (987) 654-3210</p>
+                    <button>Enquire Now</button>
+                </div>
+            </div>
+            <div class="seller-box">
+                <img src="seller3.jpg" alt="Seller 3">
+                <div class="seller-details">
+                    <h3>Michael Brown</h3>
+                    <p>Rating: ★★★★☆</p>
+                    <p>Location: California, USA</p>
+                    <p>Quantity: 200 kg</p>
+                    <p>Price: $300</p>
+                    <p>Phone: (555) 555-5555</p>
+                    <button>Enquire Now</button>
+                </div>
+            </div>
+            <div class="seller-box">
+                <img src="seller4.jpg" alt="Seller 4">
+                <div class="seller-details">
+                    <h3>Laura White</h3>
+                    <p>Rating: ★★★★☆</p>
+                    <p>Location: Florida, USA</p>
+                    <p>Quantity: 50 kg</p>
+                    <p>Price: $150</p>
+                    <p>Phone: (444) 444-4444</p>
+                    <button>Enquire Now</button>
+                </div>
+            </div>
+            <div class="seller-box">
+                <img src="seller5.jpg" alt="Seller 5">
+                <div class="seller-details">
+                    <h3>Tom Johnson</h3>
+                    <p>Rating: ★★★☆☆</p>
+                    <p>Location: New York, USA</p>
+                    <p>Quantity: 80 kg</p>
+                    <p>Price: $220</p>
+                    <p>Phone: (333) 333-3333</p>
+                    <button>Enquire Now</button>
+                </div>
+            </div>
+            <div class="seller-box">
+                <img src="seller6.jpg" alt="Seller 6">
+                <div class="seller-details">
+                    <h3>Emily Clark</h3>
+                    <p>Rating: ★★★★★</p>
+                    <p>Location: Nevada, USA</p>
+                    <p>Quantity: 120 kg</p>
+                    <p>Price: $280</p>
+                    <p>Phone: (222) 222-2222</p>
+                    <button>Enquire Now</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Company Name | Address: 1234 Street, City, Country | Contact: (123) 456-7890</p>
+    </footer>
+
+</body>
+</html>

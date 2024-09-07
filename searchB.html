@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Search</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Top navigation bar */
+    .navbar {
+      display: flex;
+      align-items: center;
+      background-color: #333;
+      padding: 10px;
+      color: white;
+      position: sticky;
+      top: 0;
+    }
+
+    /* Image on the left */
+    .navbar img {
+      height: 50px;
+      width: 50px;
+      margin-right: 20px;
+    }
+
+    /* Centered search bar */
+    .search-container {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-container select {
+      padding: 10px;
+      width: 200px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+
+    /* Voice recognition icon */
+    .voice-search {
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .voice-search img {
+      width: 30px;
+      height: 30px;
+    }
+
+    /* Right side options */
+    .navbar-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-right a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+    }
+
+    .navbar-right a:hover {
+      background-color: #575757;
+      border-radius: 5px;
+    }
+
+    /* Profile icon (circle avatar) */
+    .navbar-right img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* Additional content after search */
+    #content {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    /* Number input controls for min quantity and price */
+    .number-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .number-input input {
+      width: 80px;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 0 5px;
+      -moz-appearance: textfield;
+    }
+
+    .number-input input::-webkit-outer-spin-button,
+    .number-input input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .number-input button {
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Submit button */
+    .find-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 30px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #cropImage {
+      width: 200px;
+      height: 200px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation bar -->
+  <div class="navbar">
+    <!-- Image on the left -->
+    <img src="your-logo.png" alt="Logo">
+    
+    <!-- Search bar in the center -->
+    <div class="search-container">
+      <select id="cropSearch" onchange="searchCrops()">
+        <option value="" disabled selected>Select Crop</option>
+        <option value="wheat">Wheat</option>
+        <option value="rice">Rice</option>
+        <option value="corn">Corn</option>
+        <option value="soybean">Soybean</option>
+        <option value="barley">Barley</option>
+      </select>
+      <div class="voice-search" onclick="startVoiceRecognition()">
+        <img src="mic-icon.png" alt="Voice Search">
+      </div>
+    </div>
+    
+    <!-- Right side options -->
+    <div class="navbar-right">
+      <a href="#">How to use site?</a>
+      <a href="#"><img src="profile-avatar.jpg" alt="Profile"></a>
+    </div>
+  </div>
+
+  <!-- Placeholder for crop image and options -->
+  <div id="content">
+    <!-- Content will appear here -->
+  </div>
+
+  <script>
+    function searchCrops() {
+      const crop = document.getElementById('cropSearch').value;
+      
+      if (crop) {
+        let cropImage = '';
+        if (crop === "rice") {
+          cropImage = 'rice.jpg';
+        } else if (crop === "wheat") {
+          cropImage = 'wheat.jpg';
+        } // Add more crops with their corresponding images as needed
+        
+        document.getElementById('content').innerHTML = `
+          <img id="cropImage" src="${cropImage}" alt="${crop}">
+          <div class="number-input">
+            <label>Minimum Quantity: </label>
+            <button onclick="changeValue('quantity', -1)">-</button>
+            <input type="number" id="quantity" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
+            <button onclick="changeValue('quantity', 1)">+</button>
+          </div>
+          <div class="number-input">
+            <label>Expected Price: </label>
+            <button onclick="changeValue('price', -1)">-</button>
+            <input type="number" id="price" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
+            <button onclick="changeValue('price', 1)">+</button>
+          </div>
+          <div>
+            <label>Area (in acres):</label>
+            <input type="text" id="area" placeholder="Enter area">
+          </div>
+          <button class="find-button" onclick="loadNewPage()">Find</button>
+        `;
+      }
+    }
+
+    function changeValue(id, delta) {
+      const input = document.getElementById(id);
+      let value = parseInt(input.value);
+      value += delta;
+      if (value < 1) value = 1;
+      input.value = value;
+    }
+
+    function loadNewPage() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'buyer.html', true); // Ensure buyer.html exists in same folder
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          document.getElementById('content').innerHTML = xhr.responseText;
+        } else if (xhr.readyState === 4 && xhr.status !== 200) {
+          alert("Could not load the page. Please make sure the file exists.");
+        }
+      };
+      xhr.send();
+    }
+
+    function startVoiceRecognition() {
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = 'en-US';
+  
+  recognition.onresult = function(event) {
+    const transcript = event.results[0][0].transcript.toLowerCase();
+    const cropSelect = document.getElementById('cropSearch');
+    const options = cropSelect.options;
+
+    // Search for the spoken text in the dropdown options
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].value === transcript) {
+        cropSelect.selectedIndex = i;  // Select the matched crop
+        searchCrops();  // Call the search function to display the crop image and inputs
+        return;
+      }
+    }
+
+    // If no match, just place the spoken text in the search box (you can remove this part if it's not needed)
+    cropSelect.options[0].text = transcript;
+  };
+
+  recognition.onerror = function(event) {
+    console.log('Voice recognition error: ' + event.error);
+  };
+
+  recognition.start();
+}
+  </script>
+
+</body>
+</html>
