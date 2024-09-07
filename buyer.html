@@ -4,131 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Page</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('images/leaf-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .sellers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .seller-box {
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+            width: 320px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .seller-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .seller-box img {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .seller-details h3 {
+            font-size: 24px;
+            margin: 0 0 10px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .seller-details p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #555;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .seller-box {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
-<style>
-    /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #f9f9f9;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Header Styles */
-header {
-    background-color: #4CAF50;
-    padding: 15px;
-    text-align: center;
-}
-
-header ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-header ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-header ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-header ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Seller Box Styles */
-.sellers {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    flex-grow: 1; /* Push footer to the bottom */
-}
-
-.seller-box {
-    display: flex;
-    background-color: #fff;
-    width: 45%;
-    margin: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    align-items: center;
-}
-
-.seller-box img {
-    width: 160px;
-    height: 120px; /* Wider image */
-    border-radius: 8px;
-    margin-right: 20px;
-    object-fit: cover;
-}
-
-.seller-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.seller-details h3 {
-    margin: 0;
-    font-size: 20px;
-}
-
-.seller-details p {
-    margin: 5px 0;
-    font-size: 16px;
-}
-
-button {
-    padding: 8px 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-/* Footer Styles */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    width: 100%;
-    margin-top: auto; /* Ensure footer stays at bottom */
-}
-
-</style>
 <body>
-
-    <!-- Header -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Login</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <!-- Main Content: Seller Information -->
     <main>
