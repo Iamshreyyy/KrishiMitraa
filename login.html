@@ -1,111 +1,117 @@
-
-
 <html>
 <head>
-	<title>LOGIN - <?php echo CONFIG::SYSTEM_NAME; ?> </title>
-	<?php require_once "inc/head.inc.php";  ?> 
+    <title>Agri Farming Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        .bg {
+            background-image: url('https://placehold.co/800x600?text=Background+Image+of+Green+Leaves');
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        .login-container h2 {
+            color: #2c7a7b;
+            font-weight: bold;
+            text-align: center;
+        }
+        .login-container .nav-tabs {
+            justify-content: center;
+            border-bottom: none;
+        }
+        .login-container .nav-link {
+            color: #2c7a7b;
+        }
+        .login-container .nav-link.active {
+            color: #2c7a7b;
+            font-weight: bold;
+        }
+        .login-container .form-control {
+            border-radius: 20px;
+        }
+        .login-container .btn {
+            background-color: #2c7a7b;
+            color: white;
+            border-radius: 20px;
+            width: 100%;
+        }
+        .login-container .form-check-label {
+            color: #2c7a7b;
+        }
+    </style>
 </head>
 <body>
-	<?php require_once "inc/header.inc.php"; ?> 
-	<div class='container-fluid' >
-		<div class='row'>
-			<div class='col-md-3'> 
-				<img src='images/doc-background-two-right.png' class='img-responsive' /> 
-			</div> <!-- this should be a sidebar --> 
-			<div class='col-md-9'>
-				<div class='content-area'> 
-					<div class='content-header'> 
-						Login <small>Login to access the system</small>
-					</div>
-					<div class='content-body'> 
-
-						<?php 
-							if(isset($_GET['attempt'])){
-								// STARTING THE LOGIN AREA 
-
-								$status = $_GET['attempt'];
-
-								if($status == 1){
-									$header = "Login as an Admin"; 
-								} else {
-									$header = "Login as a Doctor"; 
-								}
-
-								echo "<center><div class='badge-header'>$header</div></center>"; 
-
-								// we created a method for creating forms
-
-								if(isset($_POST['login-email'])){
-									$email = $_POST['login-email']; 
-									$password = $_POST['login-password'];
-
-									if($email == "" || $password == ""){
-										Messages::error("You must fill in all the fields");
-									} else {
-										User::login($email, $password, $status);
-									}
-
-								}
-
-							?> 
-							<div class='row'>
-								<div class='col-md-3'></div>
-								<div class='col-md-6'>
-									<div class='form-holder'>
-										<?php Db::form(array("Email", "Password"), 3, array("login-email", "login-password"), array("text", "password"), "Login"); ?> 
-									</div>
-								</div> 
-								<div class='col-md-3'></div>
-							</div> 
-							<?php 
-								// ENDNG TGHE LOGIN AREA
-							} else {
-
-						?>
-
-						<center><div class='badge-header'>Login As:</div></center> 
-						<div class='row'>
-							<div class='col-md-2'></div>
-							<div class='col-md-8'> 
-								<div class='row' style='margin-top: 70px;'> 
-									<div class='col-md-4'>
-										<center>
-											<div class='img-login-icons'>
-												<img  class='img-responsive' src='images/3678411 - hospital medical nurse.png' alt='login as a doctor' />
-											</div>
-											<center><a href='login.php?attempt=1'><div class='badge-header'>Admin</div></a></center> 
-
-										</center> 
-									</div> 
-									<div class='col-md-4'> 
-
-										<center>
-											<div class='img-login-icons'>
-												<img  class='img-responsive' src='images/3678412 - doctor medical care medical help stethoscope.png' alt='login as a doctor' />
-											</div>
-											<center><a href='login.php?attempt=2'><div class='badge-header'>Doctor</div></a></center> 
-										</center>
-									</div> 
-									
-									<div class='col-md-4'> 
-
-										<center>
-											<div class='img-login-icons'>
-												<img  class='img-responsive' src='images/3678443 - ambulance fast fast hospital.png' alt='login as a doctor' />
-											</div>
-											<center><a href='login-patient.php'><div class='badge-header'>Patient</div></a></center> 
-										</center>
-									</div> 
-									
-								</div> 
-							</div> 
-							<div class='col-md-2'></div>
-							<?php } ?> 
-						</div><!-- end of the content area --> 
-					</div> 
-				</div>  
-			</div> 
-		</div> 
-	</div> 
-</body>
-</html>
+    <div class="bg">
+        <div class="login-container">
+            <h2>LOGIN</h2>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="user-login-tab" data-bs-toggle="tab" href="#user-login" role="tab" aria-controls="user-login" aria-selected="true">User Login</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="admin-login-tab" data-bs-toggle="tab" href="#admin-login" role="tab" aria-controls="admin-login" aria-selected="false">Admin Login</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="user-login" role="tabpanel" aria-labelledby="user-login-tab">
+                    <form>
+                        <div class="mb-3">
+                            <label for="userId" class="form-label">User ID</label>
+                            <input type="text" class="form-control" id="userId">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="showPassword">
+                            <label class="form-check-label" for="showPassword">Show Password</label>
+                        </div>
+                        <div class="mb-3">
+                            <a href="#" class="text-decoration-none" style="color: #2c7a7b;">Forget Password</a>
+                        </div>
+                        <button type="submit" class="btn">Login</button>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="admin-login" role="tabpanel" aria-labelledby="admin-login-tab">
+                    <form>
+                        <div class="mb-3">
+                            <label for="adminId" class="form-label">Admin ID</label>
+                            <input type="text" class="form-control" id="adminId">
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="adminPassword">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="showAdminPassword">
+                            <label class="form-check-label" for="showAdminPassword">Show Password</label>
+                        </div>
+                        <div class="mb-3">
+                            <a href="#" class="text-decoration-none" style="color: #2c7a7b;">Forget Password</a>
+                        </div>
+                        <button type="submit" class="btn">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qjzFj5r5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5p6z5
