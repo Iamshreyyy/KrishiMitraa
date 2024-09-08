@@ -9,13 +9,15 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background: url('images/leaf-background.jpg') no-repeat center center fixed;
+      background-size: cover;
     }
 
     /* Top navigation bar */
     .navbar {
       display: flex;
       align-items: center;
-      background-color: #333;
+      background-color: #23d21d; /* Updated color */
       padding: 10px;
       color: white;
       position: sticky;
@@ -26,6 +28,7 @@
     .navbar img {
       height: 50px;
       width: 50px;
+      border-radius: 50%; /* Circle avatar */
       margin-right: 20px;
     }
 
@@ -33,6 +36,7 @@
     .search-container {
       flex-grow: 1;
       display: flex;
+      align-items: center;
       justify-content: center;
     }
 
@@ -44,7 +48,6 @@
       margin-right: 10px;
     }
 
-    /* Voice recognition icon */
     .voice-search {
       margin-left: 10px;
       cursor: pointer;
@@ -52,9 +55,9 @@
       align-items: center;
     }
 
-    .voice-search img {
-      width: 30px;
-      height: 30px;
+    .voice-search i {
+      font-size: 24px;
+      color: white;
     }
 
     /* Right side options */
@@ -75,26 +78,39 @@
       border-radius: 5px;
     }
 
-    /* Profile icon (circle avatar) */
-    .navbar-right img {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      object-fit: cover;
+    .navbar-right i {
+      font-size: 24px;
+      color: white;
+      margin-left: 20px;
     }
 
-    /* Additional content after search */
+    /* Content section below the navbar */
     #content {
       margin-top: 20px;
       text-align: center;
     }
 
-    /* Number input controls for min quantity and price */
+    /* Blur box styling */
+    .blur-box {
+      background: rgba(255, 255, 255, 0.8); /* White with opacity */
+      backdrop-filter: blur(10px); /* Blur effect */
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 800px;
+      position: relative;
+    }
+
     .number-input {
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 10px 0;
+    }
+
+    .number-input label {
+      margin-right: 10px;
     }
 
     .number-input input {
@@ -160,16 +176,14 @@
         <option value="barley">Barley</option>
       </select>
       <div class="voice-search" onclick="startVoiceRecognition()">
-        <i style="font-size:24px" class="fa">&#xf130;</i>
-        
+        <i class="fa">&#xf130;</i>
       </div>
     </div>
     
     <!-- Right side options -->
     <div class="navbar-right">
-
       <a href="#">How to use site?</a>
-      <i style='font-size:24px' class='fa'>&#xf2bd;</i>
+      <i class='fa'>&#xf2bd;</i>
     </div>
   </div>
 
@@ -192,23 +206,25 @@
         
         document.getElementById('content').innerHTML = `
           <img id="cropImage" src="${cropImage}" alt="${crop}">
-          <div class="number-input">
-            <label>Minimum Quantity: </label>
-            <button onclick="changeValue('quantity', -1)">-</button>
-            <input type="number" id="quantity" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
-            <button onclick="changeValue('quantity', 1)">+</button>
+          <div class="blur-box">
+            <div class="number-input">
+              <label>Minimum Quantity:</label>
+              <button onclick="changeValue('quantity', -1)">-</button>
+              <input type="number" id="quantity" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
+              <button onclick="changeValue('quantity', 1)">+</button>
+            </div>
+            <div class="number-input">
+              <label>Expected Price:</label>
+              <button onclick="changeValue('price', -1)">-</button>
+              <input type="number" id="price" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
+              <button onclick="changeValue('price', 1)">+</button>
+            </div>
+            <div>
+              <label>Area (in acres):</label>
+              <input type="text" id="area" placeholder="Enter area">
+            </div>
+            <button class="find-button" onclick="loadNewPage()">Find</button>
           </div>
-          <div class="number-input">
-            <label>Expected Price: </label>
-            <button onclick="changeValue('price', -1)">-</button>
-            <input type="number" id="price" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
-            <button onclick="changeValue('price', 1)">+</button>
-          </div>
-          <div>
-            <label>Area (in acres):</label>
-            <input type="text" id="area" placeholder="Enter area">
-          </div>
-          <button class="find-button" onclick="loadNewPage()">Find</button>
         `;
       }
     }
@@ -235,33 +251,33 @@
     }
 
     function startVoiceRecognition() {
-  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-  recognition.lang = 'en-US';
-  
-  recognition.onresult = function(event) {
-    const transcript = event.results[0][0].transcript.toLowerCase();
-    const cropSelect = document.getElementById('cropSearch');
-    const options = cropSelect.options;
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+      
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        const cropSelect = document.getElementById('cropSearch');
+        const options = cropSelect.options;
 
-    // Search for the spoken text in the dropdown options
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].value === transcript) {
-        cropSelect.selectedIndex = i;  // Select the matched crop
-        searchCrops();  // Call the search function to display the crop image and inputs
-        return;
-      }
+        // Search for the spoken text in the dropdown options
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value === transcript) {
+            cropSelect.selectedIndex = i;  // Select the matched crop
+            searchCrops();  // Call the search function to display the crop image and inputs
+            return;
+          }
+        }
+
+        // If no match, just place the spoken text in the search box (you can remove this part if it's not needed)
+        cropSelect.options[0].text = transcript;
+      };
+
+      recognition.onerror = function(event) {
+        console.log('Voice recognition error: ' + event.error);
+      };
+
+      recognition.start();
     }
-
-    // If no match, just place the spoken text in the search box (you can remove this part if it's not needed)
-    cropSelect.options[0].text = transcript;
-  };
-
-  recognition.onerror = function(event) {
-    console.log('Voice recognition error: ' + event.error);
-  };
-
-  recognition.start();
-}
   </script>
 
 </body>
