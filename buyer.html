@@ -17,11 +17,71 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            color: #333;
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background-color: #222;
+            color: white;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Floating Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            z-index: 999;
+            transition: background-color 0.5s ease;
+        }
+
+        header h1 {
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Scroll-to-top Button */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scroll-top-btn.show {
+            display: flex;
         }
 
         /* Main Content */
         main {
-            padding: 40px;
+            padding: 100px 40px 40px; /* Adjusted for floating header */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -29,45 +89,57 @@
         }
 
         .sellers {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             justify-content: center;
         }
 
+        /* Seller Box */
         .seller-box {
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
-    width: 320px;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden; /* Prevent overflow */
-    text-align: center;
-    box-sizing: border-box; /* Ensure padding is within the box size */
-    max-height: 500px; /* Define a maximum height to prevent overflow */
-}
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
 
         .seller-box:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) rotate(1deg);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
 
-        .seller-box img {
-    width: 100%;
-    height: 180px;
-    max-height: 180px; /* Ensure image doesn't grow too large */
-    border-radius: 12px;
-    object-fit: cover;
-    margin-bottom: 15px;
-    display: block;
-}
+        .seller-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+        }
 
+        /* Seller Box Image */
+        .seller-box img {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        /* Seller Details */
         .seller-details h3 {
             font-size: 24px;
             margin: 0 0 10px;
             color: #333;
             font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .seller-details p {
@@ -76,6 +148,13 @@
             color: #555;
         }
 
+        .seller-details .stars {
+            color: gold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* 3D Button Effects */
         button {
             margin-top: 15px;
             padding: 10px;
@@ -86,23 +165,80 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: 700;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         button:hover {
             background-color: #45a049;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
         }
 
-        /* Footer Styles */
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f00;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Footer */
         footer {
             background-color: #333;
             color: white;
             text-align: center;
             padding: 15px;
             font-size: 14px;
+            position: relative;
         }
 
+        footer .social-icons {
+            margin-top: 10px;
+        }
+
+        footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        /* Dark Mode */
+        .dark-mode footer {
+            background-color: #222;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            main {
+                padding: 80px 20px 20px;
+            }
+
             .seller-box {
                 width: 90%;
             }
@@ -111,88 +247,37 @@
 </head>
 <body>
 
+    <!-- Floating Header -->
+    <header>
+        <h1>Seller Page</h1>
+    </header>
+
+    <!-- Dark Mode Toggle -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+
     <!-- Main Content: Seller Information -->
     <main>
         <section class="sellers">
-            <div class="seller-box">
+            <div class="seller-box" onclick="openModal('Aditya Dixit')">
                 <img src="images/buy1.jpg" alt="not success">
                 <div class="seller-details">
                     <h3>Aditya Dixit</h3>
-                    <p>Rating: ★★★★☆</p>
+                    <p class="stars">★★★★☆</p>
                     <p>Location: Uttar Pradesh, India</p>
                     <p>Quantity: 100 kg</p>
                     <p>Price: ₹50/Kg</p>
-                    <p>Phone: 9310296487</p>
-                    <button>Enquire Now</button>
                 </div>
             </div>
-            <div class="seller-box">
-                <img src="images/buy2.jpeg" alt="Seller 2">
-                <div class="seller-details">
-                    <h3>Shreyansh Agarwal</h3>
-                    <p>Rating: ★★★☆☆</p>
-                    <p>Location: Bareilly, India</p>
-                    <p>Quantity: 150 kg</p>
-                    <p>Price: ₹25/Kg</p>
-                    <p>Phone: 9876543219</p>
-                    <button>Enquire Now</button>
-                </div>
-            </div>
-            <div class="seller-box">
-                <img src="images/buy3.jpeg" alt="Seller 3">
-                <div class="seller-details">
-                    <h3>Archit Nigam</h3>
-                    <p>Rating: ★★★★☆</p>
-                    <p>Location: Lucknow, India</p>
-                    <p>Quantity: 200 kg</p>
-                    <p>Price: ₹ 30/Kg</p>
-                    <p>Phone: 5678912349</p>
-                    <button>Enquire Now</button>
-                </div>
-            </div>
-            <div class="seller-box">
-                <img src="images/buy4.jpg" alt="Seller 4">
-                <div class="seller-details">
-                    <h3>Hardik Kaushik</h3>
-                    <p>Rating: ★★★★☆</p>
-                    <p>Location: Haryana, India</p>
-                    <p>Quantity: 50 kg</p>
-                    <p>Price: ₹ 20/kg</p>
-                    <p>Phone: 1111111111</p>
-                    <button>Enquire Now</button>
-                </div>
-            </div>
-            <div class="seller-box">
-                <img src="images/buy5.png" alt="Seller 5">
-                <div class="seller-details">
-                    <h3>Shashank Pandey</h3>
-                    <p>Rating: ★★★☆☆</p>
-                    <p>Location: Karnataka, India</p>
-                    <p>Quantity: 80 kg</p>
-                    <p>Price: ₹ 30/Kg</p>
-                    <p>Phone: 222222222</p>
-                    <button>Enquire Now</button>
-                </div>
-            </div>
-            <div class="seller-box">
-                <img src="images/buy6.jpeg" alt="Seller 6">
-                <div class="seller-details">
-                    <h3>Aarsh Sharma</h3>
-                    <p>Rating: ★★★★★</p>
-                    <p>Location: Assam, India</p>
-                    <p>Quantity: 120 kg</p>
-                    <p>Price: ₹29</p>
-                    <p>Phone: (222) 222-22</p>
-                    <button>Enquire Now</button>
-                </div>
-            </div>
+
+            <!-- Add more seller boxes here -->
+
         </section>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Company Name | Address: 1234 Street, City, Country | Contact: (123) 456-7890</p>
+        <p>&copy; 2024 DivyAstra | Address: Manipal University Jaipur | Contact: 9310296487</p>
+        
     </footer>
 
-</body>
-</html>
+   
