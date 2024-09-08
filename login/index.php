@@ -60,6 +60,7 @@
 
     // Handle sign-up form submission
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['signup'])) {
+        $userid=$_POST['username'];
         $phone = $_POST['phone_number'];
         $email = $_POST['email'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash password
@@ -75,7 +76,7 @@
             // Insert the new farmer into the database
             $stmt = $conn->prepare("INSERT INTO Farmers (username, email, phone_number, password) VALUES (:username, :email, :phone, :password)");
             $stmt->execute([
-                'username' => $phone, // Use phone number as username
+                'username' => $userid , // Use phone number as username
                 'email' => $email,
                 'phone' => $phone,
                 'password' => $password
@@ -84,7 +85,7 @@
             // Farmer registration successful
             session_start();
             $_SESSION['user_id'] = $conn->lastInsertId();
-            $_SESSION['username'] = $phone;
+            $_SESSION['username'] = $userid;
             $_SESSION['role'] = 'farmer';
             header("Location:./farmer_dashboard.php"); // Redirect to farmer dashboard
             exit();
@@ -126,6 +127,10 @@
           <!-- Sign Up Form -->
           <form action="" method="POST" class="sign-up-form">
             <h2 class="title">Sign Up</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" name="username" placeholder="User name" required />
+            </div>
             <div class="input-field">
               <i class="fas fa-user"></i>
               <input type="text" name="phone_number" placeholder="Phone Number" required />
