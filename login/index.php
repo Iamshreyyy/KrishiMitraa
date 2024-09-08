@@ -45,7 +45,7 @@
             $_SESSION['user_id'] = $farmer['farmer_id'];
             $_SESSION['username'] = $farmer['username'];
             $_SESSION['role'] = 'farmer';
-            header("Location: farmer_dashboard.php"); // Redirect to farmer dashboard
+            header("Location: ./profile.php"); // Redirect to farmer dashboard
             exit();
         }
 
