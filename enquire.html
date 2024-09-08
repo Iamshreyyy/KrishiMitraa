@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller - Aditya Dixit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('images/leaf-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Main Content */
+        main {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            border-radius: 10px;
+            margin: 40px;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .seller-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .seller-info img {
+            width: 300px;
+            height: 200px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .seller-info p {
+            font-size: 18px;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .seller-info span {
+            font-weight: bold;
+        }
+
+        /* Enquiry Form */
+        form {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        form input, form textarea {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        form button {
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Seller: Aditya Dixit</h2>
+        <div class="seller-info">
+            <img src="images/buy1.jpg" alt="Aditya Dixit">
+            <p><span>Location:</span> Uttar Pradesh, India</p>
+            <p><span>Rating:</span> ★★★★☆</p>
+            <p><span>Quantity Available:</span> 100 kg</p>
+            <p><span>Price:</span> ₹50/Kg</p>
+            <p><span>Phone:</span> 9310296487</p>
+            <p><span>Email:</span> aditya.dixit@example.com</p>
+        </div>
+
+        <!-- Enquiry Form -->
+        <form action="#" method="POST">
+            <h3>Contact Aditya Dixit</h3>
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Enquiry</button>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 DivyAstra | Address: Manipal University | Contact: 9310296487</p>
+    </footer>
+
+</body>
+</html>
