@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract - Aditya Dixit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('images/leaf-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin: 40px;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .contract-details {
+            font-size: 18px;
+            color: #555;
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .contract-details p {
+            margin: 10px 0;
+        }
+
+        .contract-actions {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .contract-actions button {
+            padding: 15px;
+            font-size: 18px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 48%;
+            transition: background-color 0.3s ease;
+        }
+
+        .contract-actions .accept {
+            background-color: #4CAF50;
+        }
+
+        .contract-actions .accept:hover {
+            background-color: #45a049;
+        }
+
+        .contract-actions .reject {
+            background-color: #FF5252;
+        }
+
+        .contract-actions .reject:hover {
+            background-color: #E64A19;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Digital Contract for Purchase with Aditya Dixit</h2>
+        <div class="contract-details">
+            <p><strong>Buyer Name:</strong> [Buyer Name]</p>
+            <p><strong>Seller Name:</strong> Aditya Dixit</p>
+            <p><strong>Product:</strong> Organic Grains</p>
+            <p><strong>Quantity:</strong> 100 kg</p>
+            <p><strong>Price:</strong> ₹50/kg</p>
+            <p><strong>Total Amount:</strong> ₹5,000</p>
+            <p><strong>Delivery Date:</strong> [Set Date]</p>
+            <p><strong>Terms & Conditions:</strong></p>
+            <ul>
+                <li>Full payment due upon delivery.</li>
+                <li>Return policy available within 7 days of delivery.</li>
+                <li>Delivery will be handled by the seller.</li>
+            </ul>
+        </div>
+
+        <div class="contract-actions">
+            <button class="accept" onclick="handleAccept()">Accept Contract</button>
+            <button class="reject" onclick="handleReject()">Reject Contract</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 DivyAstra | Address: Manipal University | Contact: 9310296487</p>
+    </footer>
+
+    <script>
+        function handleAccept() {
+            alert("You have accepted the contract. A confirmation email will be sent.");
+            // You can redirect or process the acceptance
+            window.location.href = 'success.html';
+        }
+
+        function handleReject() {
+            alert("You have rejected the contract.");
+            // You can redirect or take some action on rejection
+            window.location.href = 'seller-aditya.html';
+        }
+    </script>
+</body>
+</html>
