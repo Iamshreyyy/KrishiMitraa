@@ -50,7 +50,7 @@
             $_SESSION['user_id'] = $buyer['buyer_id'];
             $_SESSION['username'] = $buyer['username'];
             $_SESSION['role'] = 'buyer';
-            header("Location: buyer_dashboard.php"); // Redirect to buyer dashboard
+            header("Location: ../buyer_profile.php"); // Redirect to buyer dashboard
             exit();
         }
 

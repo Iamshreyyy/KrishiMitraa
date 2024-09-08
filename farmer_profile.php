@@ -44,6 +44,7 @@ if (!$farmer) {
     <style>
         body {
             background-color: #f8f9fa;
+            background: url('images/leaf-background.jpg')
         }
         .navbar {
             background-color: #28a745;
