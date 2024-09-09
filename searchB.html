@@ -194,40 +194,53 @@
 
   <script>
     function searchCrops() {
-      const crop = document.getElementById('cropSearch').value;
-      
-      if (crop) {
-        let cropImage = '';
-        if (crop === "rice") {
-          cropImage = 'rice.jpg';
-        } else if (crop === "wheat") {
-          cropImage = 'wheat.jpg';
-        } // Add more crops with their corresponding images as needed
-        
-        document.getElementById('content').innerHTML = `
-          <img id="cropImage" src="${cropImage}" alt="${crop}">
-          <div class="blur-box">
-            <div class="number-input">
-              <label>Minimum Quantity:</label>
-              <button onclick="changeValue('quantity', -1)">-</button>
-              <input type="number" id="quantity" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
-              <button onclick="changeValue('quantity', 1)">+</button>
-            </div>
-            <div class="number-input">
-              <label>Expected Price:</label>
-              <button onclick="changeValue('price', -1)">-</button>
-              <input type="number" id="price" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
-              <button onclick="changeValue('price', 1)">+</button>
-            </div>
-            <div>
-              <label>Area (in acres):</label>
-              <input type="text" id="area" placeholder="Enter area">
-            </div>
-            <button class="find-button" onclick="loadNewPage()">Find</button>
-          </div>
-        `;
-      }
+  const crop = document.getElementById('cropSearch').value;
+  
+  if (crop) {
+    let cropImage = '';
+  
+    // Check the selected crop and assign the corresponding image
+    if (crop === "rice") {
+      cropImage = 'images/rice.jpg';
+    } else if (crop === "wheat") {
+      cropImage = 'images/wheat.jpg';
+    } else if (crop === "corn") {
+      cropImage = 'images/corn.jpg';
+    } else if (crop === "barley") {
+      cropImage = 'images/barley.jpg';
+    } else if (crop === "soybean") {
+      cropImage = 'images/soybean.jpg';
     }
+
+    // Update the content div with the crop image and additional inputs
+    document.getElementById('content').innerHTML = `
+      <img id="cropImage" src="${cropImage}" alt="${crop}" onerror="this.src='images/placeholder.jpg';">
+      <div class="blur-box">
+        <div class="number-input">
+          <label>Minimum Quantity:</label>
+          <button onclick="changeValue('quantity', -1)">-</button>
+          <input type="number" id="quantity" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
+          <button onclick="changeValue('quantity', 1)">+</button>
+        </div>
+        <div class="number-input">
+          <label>Expected Price:</label>
+          <button onclick="changeValue('price', -1)">-</button>
+          <input type="number" id="price" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
+          <button onclick="changeValue('price', 1)">+</button>
+        </div>
+        <div>
+          <label>Area (in acres):</label>
+          <input type="text" id="area" placeholder="Enter area">
+        </div>
+        <button class="find-button" onclick="loadNewPage()">Find</button>
+      </div>
+    `;
+  } else {
+    // If no crop is selected, clear the content area
+    document.getElementById('content').innerHTML = '';
+  }
+}
+    
 
     function changeValue(id, delta) {
       const input = document.getElementById(id);
