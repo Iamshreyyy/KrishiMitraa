@@ -251,15 +251,16 @@
     }
 
     function loadNewPage() {
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', 'buyer.html', true); // Ensure buyer.html exists in same folder
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          document.getElementById('content').innerHTML = xhr.responseText;
-        } else if (xhr.readyState === 4 && xhr.status !== 200) {
-          alert("Could not load the page. Please make sure the file exists.");
-        }
-      };
+      window.location.href = 'buyer.php';
+      // const xhr = new XMLHttpRequest();
+      // xhr.open('GET', 'buyer.html', true); // Ensure buyer.html exists in same folder
+      // xhr.onreadystatechange = function() {
+      //   if (xhr.readyState === 4 && xhr.status === 200) {
+      //     document.getElementById('content').innerHTML = xhr.responseText;
+      //   } else if (xhr.readyState === 4 && xhr.status !== 200) {
+      //     alert("Could not load the page. Please make sure the file exists.");
+      //   }
+      //};
       xhr.send();
     }
 
