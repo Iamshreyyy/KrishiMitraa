@@ -1,234 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KrishiMitra</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Search</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('images/leaf-background.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
 
-    <script src="https://kit.fontawesome.com/c1df782baf.js"></script>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-    <link rel="stylesheet" href="style.css">
+    /* Top navigation bar */
+    .navbar {
+      display: flex;
+      align-items: center;
+      background-color: #23d21d; /* Updated color */
+      padding: 10px;
+      color: white;
+      position: sticky;
+      top: 0;
+    }
 
+    /* Image on the left */
+    .navbar img {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%; /* Circle avatar */
+      margin-right: 20px;
+    }
+
+    /* Centered search bar */
+    .search-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-container select {
+      padding: 10px;
+      width: 200px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+
+    .voice-search {
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .voice-search i {
+      font-size: 24px;
+      color: white;
+    }
+
+    /* Right side options */
+    .navbar-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-right a {
+      margin-left: 20px;
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+    }
+
+    .navbar-right a:hover {
+      background-color: #575757;
+      border-radius: 5px;
+    }
+
+    .navbar-right i {
+      font-size: 24px;
+      color: white;
+      margin-left: 20px;
+    }
+
+    /* Content section below the navbar */
+    #content {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    /* Blur box styling */
+    .blur-box {
+      background: rgba(255, 255, 255, 0.8); /* White with opacity */
+      backdrop-filter: blur(10px); /* Blur effect */
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 800px;
+      position: relative;
+    }
+
+    .number-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .number-input label {
+      margin-right: 10px;
+    }
+
+    .number-input input {
+      width: 80px;
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 0 5px;
+      -moz-appearance: textfield;
+    }
+
+    .number-input input::-webkit-outer-spin-button,
+    .number-input input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .number-input button {
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Submit button */
+    .find-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 30px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #cropImage {
+      width: 200px;
+      height: 200px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
-<body> 
+<body>
 
-    <header>
-        
-        <div class="logo"><img src="images/logo3.png" alt=""></div>
-    
+  <!-- Navigation bar -->
+  <div class="navbar">
+    <!-- Image on the left -->
+    <img src="images/logo3.png" alt="Logo">
+    
+    <!-- Search bar in the center -->
+    <div class="search-container">
+      <select id="cropSearch" onchange="searchCrops()">
+        <option value="" disabled selected>Select Crop</option>
+        <option value="wheat">Wheat</option>
+        <option value="rice">Rice</option>
+        <option value="corn">Corn</option>
+        <option value="soybean">Soybean</option>
+        <option value="barley">Barley</option>
+      </select>
+      <div class="voice-search" onclick="startVoiceRecognition()">
+        <i class="fa">&#xf130;</i>
+      </div>
+    </div>
+    
+    <!-- Right side options -->
+    <div class="navbar-right">
+      <a href="#">How to use site?</a>
+      <i class='fa'>&#xf2bd;</i>
+    </div>
+  </div>
 
-        <nav class="navbar">
-            <a href="#Home">Home</a>
-            <a href="#About">About</a>
-            <a href="#Services">Service</a>
-            <a href="#Home">Gallery</a>
-            <a href="#Home">Blog</a>
-            <a href="#Home">Contact</a>
-        </nav>
+  <!-- Placeholder for crop image and options -->
+  <div id="content">
+    <!-- Content will appear here -->
+  </div>
 
-        <div class="right-icons">
-            <div id="menu-bars" class="fas fa-bars"></div>
-            <div class="btn">Make Appointment</div>
-         </div>
-         
-    </header>
-
-    <!-- header section ended -->
-
-    <!-- Home section started -->
-
-        <div class="main-home">
-
-            <div class="home">
-                <div class="home-left-content">
-                    <span>Welcome to KrishiMitra</span>
-                    <h2>Bridging the gap between farmers and sellers<br> </h2>
-                   <div class="blured"><p> making agriculture trade easier, transparent, and more profitable. Our platform connects farmers directly with buyers, ensuring better prices and fostering sustainable growth.
-
-                    Farmers: Sell your crops easily, get fair prices, and reach a wider market.
-                    Sellers: Access fresh, high-quality produce directly from trusted farmers.
-                    Join us today and start trading!</p></div>
-                    
-                        <div class="home-btn">
-                            <a href="">Read More</a>
-                            <a class="homebtnsec" href="">Appointment</a>
-                        </div>
-                        
-                    </div>
-
-                <div class="home-right-content">
-                    <img src="images/hero2.png" alt="">
-                </div>
-            </div>
-        </div>
-        <div>
-            
-        </div>
-
-
-       
-
-    <!-- home section ends -->
-
-    <!-- About us section started -->
-    <section id="About">
-
-        <div class="main-about">
-
-            <div class="about-heading">About Us</div>
-
-            <div class="inner-main-about">
-                <div class="about-inner-content-left">
-                    <img src="images/about1.png" alt="">
-                </div>
-
-                <div class="about-inner-content">
-                    <div class="about-right-content">
-                        <h2>Sell Your Crops Effortlessly</h2>
-                        <p>Tired of middlemen and unpredictable pricing? At <B>FasalMART</B>, we empower you to take control of your sales. Simply register, list your crops, and connect directly with buyers who value your hard work.
-
-                            Fair pricing and transparent deals
-                            Reach a wider market across regions
-                            Simple, user-friendly interface
-                            Register now and get the best value for your crops.</p>
-                        <H2>For Buyers</H2>
-                           <P>For Sellers:
-
-                            Buy Directly from Farmers
-                            Looking for fresh, high-quality produce at competitive prices? [Website Name] connects you directly with farmers, ensuring you get the best products with no intermediaries.
-                            
-                            Browse a wide variety of crops
-                            Direct communication with farmers
-                            Save time and money <br>
-                            <b>Signup today to access fresh, quality crops!</b> </p>
-                
-                    </div>
-                </div>
-            </div>
-        </div>
-</section>
-    <!-- About us section ends -->
-    <section id="Logins">    
-        <div class="our-service">
-            
-        <div class="service-heading">
-            
-            <h2>Logins</h2>
-            
-        </div>
-
-        <div class="main-services">
-            <div class="inner-services">
-                <div class="service-icon">
-                    <i class="fa-regular fa-heart" >    </i>
-                </div>
-                <a href="searchB.html" target="_blank"><h1>Farmers</h1></a>
-                
-                            </div>
-
-            <div class="inner-services">
-                <div class="service-icon">
-                    <i class="fa-solid fa-user-doctor"></i>
-                </div>
-                <a href="login1.php" target="_blank"><h1>Buyers</h1></a>
-                </div>
-</section>
-   
-
-    <!-- our services -->
-    <section id="Services">
-
-    <div class="our-service">
-        <div class="service-heading">
-            <h2>Why Choose Us?</h2>
-        </div>
-
-        <div class="main-services">
-            <div class="inner-services">
-                <div class="service-icon">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <h3>Trustworthy Platform:</h3>
-                <p>We prioritize transparency and fairness in every deal.</p>
-            </div>
-
-            <div class="inner-services">
-                <div class="service-icon">
-                    <i class="fa-solid fa-money-bill"></i>
-                </div>
-                <h3>Secure Payments </h3>
-                <p>Safe and quick transactions for both buyers and sellers.</p>
-            </div>
-
-            <div class="inner-services">
-                <div class="service-icon">
-                    <i class="fa-solid fa-users-rectangle"></i>
-                </div>
-                <h3>Wider Market Reach</h3>
-                <p>Farmers can sell to buyers across various regions, increasing opportunities for profit.</p>
-            </div>
-
-            <div class="inner-services">
-                <div class="service-icon">
-                    <i class="fa-solid fa-list-check"></i>
-                </div>
-                <h3>Easy to Use 
-                    </h3>
-                <p>Our platform is designed to be simple and accessible, even for those with limited technical experience.</p>
-            </div>
-
-            <div class="inner-services">
-                <div class="service-icon">
-                    <i class="fa-solid fa-check"></i>
-                </div>
-                <h3>Real-Time Updates </h3>
-                <p>Get instant notifications on new listings, offers, and sales to stay updated on the go.</p>
-            </div>
-
-            <div class="inner-services">
-                <div class="service-icon">
-                    <i class="fa-solid fa-address-book"></i>
-                </div>
-                <h3>Dedicated Support
-                    </h3>
-                <p>Our customer service team is available to assist you with any queries or issues throughout your journey.</p>
-            </div>
-        </div>
-    </div>
-    </section>
-    <!-- our services ended -->
-    <div class="row client-logo">
-        <div class="col-md-12 section-title">
-            <h1>अन्य महत्वपूर्ण वेब साईट्स : </h1>
-        </div>
-        <div id="owl-demo" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
-            <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 4662px; left: 0px; display: block; transform: translate3d(0px, 0px, 0px); transition: 1000ms;"><div class="owl-item" style="width: 333px;"><div class="item"><a href="https://www.mygov.in/" target="_blank">
-                <img src="new-web/images/logo-mygov.png" alt="logo"></a></div></div><div class="owl-item" style="width: 333px;"><div class="item"><a href="https://digitalindia.gov.in/" target="_blank">
-                <img src="new-web/images/logo-digital.png" alt="logo"></a></div></div><div class="owl-item" style="width: 333px;"><div class="item"><a href="https://www.makeinindia.com/" target="_blank">
-                <img src="new-web/images/logo-makeindia.png" alt="logo"></a></div></div><div class="owl-item" style="width: 333px;"><div class="item"><a href="https://swachhbharatmission.gov.in/" target="_blank">
-                <img src="new-web/images/logo-shwcht-bharat.png" alt="logo"></a></div></div><div class="owl-item" style="width: 333px;"><div class="item"><a href="http://up.gov.in/" target="_blank">
-                <img src="new-web/images/logo-1.png" alt="logo"></a></div></div><div class="owl-item" style="width: 333px;"><div class="item"><a href="https://www.india.gov.in/" target="_blank">
-                <img src="new-web/images/logo-2.png" alt="logo"></a></div></div><div class="owl-item" style="width: 333px;"><div class="item"><a href="https://www.bis.gov.in/?lang=de" target="_blank">
-                <img src="new-web/images/bis.png" alt="logo"></a></div></div></div></div>
-            
-
-
-            
-
-
-            
-            
-            
-            
-        <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div><div class="owl-page"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div></div>
-    </div>
-
-
-    
-
-    <script src="script.js"></script>
-    <div>eref</div>
   <script>
     function searchCrops() {
       const crop = document.getElementById('cropSearch').value;
@@ -236,31 +199,32 @@
       if (crop) {
         let cropImage = '';
         if (crop === "rice") {
-          cropImage = 'images/rice.jpg';
+          cropImage = 'rice.jpg';
         } else if (crop === "wheat") {
-          cropImage = 'images/wheat.jpg';
-         } else if (crop === "Corn") {
-            cropImage = 'images/corn.jpg';} // Add more crops with their corresponding images as needed
+          cropImage = 'wheat.jpg';
+        } // Add more crops with their corresponding images as needed
         
         document.getElementById('content').innerHTML = `
           <img id="cropImage" src="${cropImage}" alt="${crop}">
-          <div class="number-input">
-            <label>Minimum Quantity: </label>
-            <button onclick="changeValue('quantity', -1)">-</button>
-            <input type="number" id="quantity" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
-            <button onclick="changeValue('quantity', 1)">+</button>
+          <div class="blur-box">
+            <div class="number-input">
+              <label>Minimum Quantity:</label>
+              <button onclick="changeValue('quantity', -1)">-</button>
+              <input type="number" id="quantity" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
+              <button onclick="changeValue('quantity', 1)">+</button>
+            </div>
+            <div class="number-input">
+              <label>Expected Price:</label>
+              <button onclick="changeValue('price', -1)">-</button>
+              <input type="number" id="price" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
+              <button onclick="changeValue('price', 1)">+</button>
+            </div>
+            <div>
+              <label>Area (in acres):</label>
+              <input type="text" id="area" placeholder="Enter area">
+            </div>
+            <button class="find-button" onclick="loadNewPage()">Find</button>
           </div>
-          <div class="number-input">
-            <label>Expected Price: </label>
-            <button onclick="changeValue('price', -1)">-</button>
-            <input type="number" id="price" value="1" inputmode="numeric" pattern="[0-9]*" min="1">
-            <button onclick="changeValue('price', 1)">+</button>
-          </div>
-          <div>
-            <label>Area (in acres):</label>
-            <input type="text" id="area" placeholder="Enter area">
-          </div>
-          <button class="find-button" onclick="loadNewPage()">Find</button>
         `;
       }
     }
@@ -287,33 +251,33 @@
     }
 
     function startVoiceRecognition() {
-  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-  recognition.lang = 'en-US';
-  
-  recognition.onresult = function(event) {
-    const transcript = event.results[0][0].transcript.toLowerCase();
-    const cropSelect = document.getElementById('cropSearch');
-    const options = cropSelect.options;
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+      
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript.toLowerCase();
+        const cropSelect = document.getElementById('cropSearch');
+        const options = cropSelect.options;
 
-    // Search for the spoken text in the dropdown options
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].value === transcript) {
-        cropSelect.selectedIndex = i;  // Select the matched crop
-        searchCrops();  // Call the search function to display the crop image and inputs
-        return;
-      }
+        // Search for the spoken text in the dropdown options
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].value === transcript) {
+            cropSelect.selectedIndex = i;  // Select the matched crop
+            searchCrops();  // Call the search function to display the crop image and inputs
+            return;
+          }
+        }
+
+        // If no match, just place the spoken text in the search box (you can remove this part if it's not needed)
+        cropSelect.options[0].text = transcript;
+      };
+
+      recognition.onerror = function(event) {
+        console.log('Voice recognition error: ' + event.error);
+      };
+
+      recognition.start();
     }
-
-    // If no match, just place the spoken text in the search box (you can remove this part if it's not needed)
-    cropSelect.options[0].text = transcript;
-  };
-
-  recognition.onerror = function(event) {
-    console.log('Voice recognition error: ' + event.error);
-  };
-
-  recognition.start();
-}
   </script>
 
 </body>
