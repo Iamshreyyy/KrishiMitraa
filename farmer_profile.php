@@ -126,7 +126,7 @@ if (!$farmer) {
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="profile-card">
-                <img src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-65G8rhTKCQ4MGf89AoldnTS2.png?st=2024-09-08T05%3A56%3A16Z&amp;se=2024-09-08T07%3A56%3A16Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-07T21%3A51%3A47Z&amp;ske=2024-09-08T21%3A51%3A47Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=5AMCWQQBoMqDLG6XSWT/k9U0FvQgHP/r8YkFJGgkr5Y%3D" alt="Profile Picture" width="150" height="150">
+            <i class="fa fa-user" style="font-size:48px;color:light blue"></i>
                 <h3><?php echo htmlspecialchars($farmer['username']); ?></h3>
                 <p>Farmer</p>
                 <p>Phone: <?php echo htmlspecialchars($farmer['phone_number']); ?></p>
