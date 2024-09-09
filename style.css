@@ -412,6 +412,10 @@ header{
 .doc-poster:hover:after{
     bottom: -100px;
 }
+.blured p {
+    filter: blur(100px); /* Apply blur effect to the text */
+    color: rgba(203, 24, 24, 0.8); /* Adjust the color and opacity */
+}
 
 
 

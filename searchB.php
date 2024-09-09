@@ -229,7 +229,7 @@
           <button onclick="changeValue('price', 1)">+</button>
         </div>
         <div>
-          <label>Area (in acres):</label>
+          <label>Area:</label>
           <input type="text" id="area" placeholder="Enter area">
         </div>
         <button class="find-button" onclick="loadNewPage()">Find</button>
