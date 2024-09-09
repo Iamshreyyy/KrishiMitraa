@@ -87,7 +87,7 @@
             $_SESSION['user_id'] = $conn->lastInsertId();
             $_SESSION['username'] = $userid;
             $_SESSION['role'] = 'farmer';
-            header("Location:./farmer_dashboard.php"); // Redirect to farmer dashboard
+            header("Location:../farmer_profile.php"); // Redirect to farmer dashboard
             exit();
         }
     }
